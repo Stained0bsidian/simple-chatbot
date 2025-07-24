@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 One-Line Chatbot Setup</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .hero {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin: 0 0 20px 0;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .one-line {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 30px;
+            border-radius: 12px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 16px;
+            margin: 30px 0;
+            position: relative;
+            word-break: break-all;
+            line-height: 1.6;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .copy-btn.copied {
+            background: #48bb78;
+        }
+
+        .steps {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .demo-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 20px 10px;
+            transition: all 0.3s;
+        }
+
+        .demo-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .note {
+            background: #ebf8ff;
+            border: 1px solid #bee3f8;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            color: #2b6cb0;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 30px 20px;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .one-line {
+                font-size: 12px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>🚀 World's Simplest Chatbot Setup</h1>
+        <p>Add an AI chatbot to ANY website with just one line of code</p>
+
+        <div class="one-line">
+            <button class="copy-btn" onclick="copyCode()">Copy</button>
+            <span id="the-code">&lt;script src="https://cdn.jsdelivr.net/gh/simple-chatbot/widget@latest/chatbot.min.js" data-webhook-url="YOUR_WEBHOOK_URL_HERE"&gt;&lt;/script&gt;</span>
+        </div>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div>
+                    <strong>Replace YOUR_WEBHOOK_URL_HERE</strong> with your n8n webhook URL
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div>
+                    <strong>Paste the code</strong> into your website before the closing &lt;/body&gt; tag
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div>
+                    <strong>That's it!</strong> Your AI chatbot is now live and ready to help visitors
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h4>Instant Setup</h4>
+                <p>Works immediately with zero configuration</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🎨</div>
+                <h4>Auto-Styled</h4>
+                <p>Beautiful design that matches any website</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📱</div>
+                <h4>Mobile Ready</h4>
+                <p>Perfect on desktop, tablet, and mobile</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🧠</div>
+                <h4>AI Powered</h4>
+                <p>Works with ChatGPT, Claude, and any AI</p>
+            </div>
+        </div>
+
+        <button class="demo-btn" onclick="openCustomizer()">🎯 Customize Your Bot</button>
+        <button class="demo-btn" onclick="window.open('demo.html', '_blank')">👀 See Live Demo</button>
+
+        <div class="note">
+            <strong>💡 Pro Tip:</strong> Don't have a webhook URL yet? 
+            <a href="simple-setup.html" style="color: #667eea; font-weight: 600;">Get one in 5 minutes</a> 
+            with our guided setup.
+        </div>
+
+        <div style="margin-top: 40px; font-size: 14px; color: #888;">
+            ⭐ <strong>Want more features?</strong> Add data attributes for custom colors, bot names, and more.<br>
+            📖 <a href="README.md" style="color: #667eea;">Full Documentation</a> • 
+            🔧 <a href="TROUBLESHOOTING.md" style="color: #667eea;">Need Help?</a> • 
+            💻 <a href="https://github.com/simple-chatbot/widget" style="color: #667eea;">GitHub</a>
+        </div>
+    </div>
+
+    <script>
+        function copyCode() {
+            const code = document.getElementById('the-code').textContent;
+            const cleanCode = code.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+            
+            navigator.clipboard.writeText(cleanCode).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                
+                // Show success message
+                const note = document.createElement('div');
+                note.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #48bb78;
+                    color: white;
+                    padding: 15px 20px;
+                    border-radius: 8px;
+                    font-weight: 600;
+                    z-index: 10000;
+                    animation: slideIn 0.3s ease;
+                `;
+                note.innerHTML = '✅ Code copied! Paste it into your website.';
+                document.body.appendChild(note);
+                
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                    btn.classList.remove('copied');
+                    note.remove();
+                }, 3000);
+            });
+        }
+
+        function openCustomizer() {
+            window.open('simple-setup.html', '_blank');
+        }
+
+        // Add animation keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html> 

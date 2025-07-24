@@ -1,0 +1,20 @@
+{
+  "name": "chatbot",
+  "version": "1.0.0",
+  "description": "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\r [![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)\r [![CDN](https://img.shields.io/badge/CDN-Ready-green.svg)](https://cdn.jsdelivr.net/)\r [![No Dependencies](https://img.shields.io/badge/Dependencies-None-blue.svg)](#)",
+  "homepage": "https://github.com/Stained0bsidian/chatbot#readme",
+  "bugs": {
+    "url": "https://github.com/Stained0bsidian/chatbot/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stained0bsidian/chatbot.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "simple-chatbot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
