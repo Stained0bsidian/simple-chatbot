@@ -62,6 +62,13 @@ All configuration is done via HTML data attributes:
 | `data-welcome-message` | "Hi! How can I help you today?" | First message shown |
 | `data-primary-color` | "#3B82F6" | Main color theme |
 | `data-position` | "bottom-right" | Widget position (bottom-right, bottom-left) |
+| `data-bot-avatar` | *default* | Bot avatar image URL (jpg, png, svg, or data URI) |
+| **Icon Customization** | | |
+| `data-toggle-icon` | "default" | Icon type: "default", "emoji", "image", "fontawesome", "custom" |
+| `data-toggle-icon-value` | "" | Icon value (emoji, URL, FA class, or SVG) |
+| `data-toggle-icon-color` | "" | Custom toggle button color (overrides primary-color) |
+| `data-toggle-icon-size` | "24px" | Size of the toggle icon |
+| **Behavior** | | |
 | `data-auto-open` | "false" | Auto-open chat after delay |
 | `data-auto-open-delay` | "10000" | Delay before auto-open (milliseconds) |
 | `data-friendly-errors` | "true" | Show user-friendly error messages |
@@ -77,6 +84,51 @@ All configuration is done via HTML data attributes:
         data-primary-color="#10B981"
         data-position="bottom-left"
         data-auto-open="true"></script>
+```
+
+## 🎨 Icon Customization Examples
+
+### 1. Emoji Toggle Icon
+```html
+<script src="https://cdn.jsdelivr.net/gh/Stained0bsidian/simple-chatbot@latest/simple-chatbot.min.js"
+        data-webhook-url="YOUR_WEBHOOK_URL"
+        data-toggle-icon="emoji"
+        data-toggle-icon-value="🤖"
+        data-toggle-icon-size="28px"></script>
+```
+
+### 2. Custom Image Toggle Icon
+```html
+<script src="https://cdn.jsdelivr.net/gh/Stained0bsidian/simple-chatbot@latest/simple-chatbot.min.js"
+        data-webhook-url="YOUR_WEBHOOK_URL"
+        data-toggle-icon="image"
+        data-toggle-icon-value="https://your-site.com/chat-icon.png"
+        data-toggle-icon-color="#FF6B6B"></script>
+```
+
+### 3. FontAwesome Icon (requires FA loaded)
+```html
+<script src="https://cdn.jsdelivr.net/gh/Stained0bsidian/simple-chatbot@latest/simple-chatbot.min.js"
+        data-webhook-url="YOUR_WEBHOOK_URL"
+        data-toggle-icon="fontawesome"
+        data-toggle-icon-value="fas fa-comments"
+        data-toggle-icon-color="#8B5CF6"></script>
+```
+
+### 4. Custom SVG Icon
+```html
+<script src="https://cdn.jsdelivr.net/gh/Stained0bsidian/simple-chatbot@latest/simple-chatbot.min.js"
+        data-webhook-url="YOUR_WEBHOOK_URL"
+        data-toggle-icon="custom"
+        data-toggle-icon-value='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="white"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="2"/></svg>'></script>
+```
+
+### 5. Custom Bot Avatar
+```html
+<script src="https://cdn.jsdelivr.net/gh/Stained0bsidian/simple-chatbot@latest/simple-chatbot.min.js"
+        data-webhook-url="YOUR_WEBHOOK_URL"
+        data-bot-avatar="https://your-site.com/bot-avatar.jpg"
+        data-bot-name="Alex Assistant"></script>
 ```
 
 ---

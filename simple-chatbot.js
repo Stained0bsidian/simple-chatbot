@@ -20,6 +20,11 @@
         primaryColor: '#3B82F6',
         position: 'bottom-right',
         botAvatar: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiMzQjgyRjYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0yMSAxNVY5QzIxIDcuMzQzMTUgMTkuNjU2OSA2IDE4IDZIMTJWNEMxMiAyLjg5NTQzIDExLjEwNDYgMiAxMCAySDhDNi44OTU0MyAyIDYgMi44OTU0MyA2IDRWNkg0QzIuMzQzMTUgNiAxIDcuMzQzMTUgMSA5VjE1QzEgMTYuNjU2OSAyLjM0MzE1IDE4IDQgMThINlYyMEM2IDIxLjEwNDYgNi44OTU0MyAyMiA4IDIySDE2QzE3LjEwNDYgMjIgMTggMjEuMTA0NiAxOCAyMFYxOEgyMUMyMS42NTY5IDE4IDIyIDE3LjY1NjkgMjIgMTdWMTVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+',
+        // Icon customization options
+        toggleIcon: 'default',        // 'default', 'emoji', 'image', 'fontawesome', or 'custom'
+        toggleIconValue: '',          // The actual icon value (emoji, image URL, FA class, or SVG)
+        toggleIconColor: '',          // Custom color for the toggle button (overrides primaryColor)
+        toggleIconSize: '24px',       // Size of the toggle icon
         // New user-friendly options
         autoOpen: false,           // Auto-open chat after delay
         autoOpenDelay: 10000,      // 10 seconds
@@ -139,7 +144,23 @@
         .simple-chatbot-toggle svg {
             width: 24px;
             height: 24px;
-            fill: white;
+            fill: currentColor;
+        }
+        
+        .simple-chatbot-toggle img {
+            width: 24px;
+            height: 24px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        
+        .simple-chatbot-toggle i {
+            font-size: 24px;
+        }
+        
+        .simple-chatbot-toggle span {
+            font-size: 24px;
+            line-height: 1;
         }
         
         .simple-chatbot-status {
@@ -597,6 +618,32 @@
             }, 30000);
         }
 
+        // Generate toggle icon HTML based on configuration
+        getToggleIconHTML() {
+            const size = this.config.toggleIconSize;
+            
+            switch (this.config.toggleIcon) {
+                case 'emoji':
+                    return `<span style="font-size: ${size}; line-height: 1;">${this.config.toggleIconValue || '💬'}</span>`;
+                    
+                case 'image':
+                    return `<img src="${this.config.toggleIconValue}" alt="Chat" style="width: ${size}; height: ${size}; object-fit: cover; border-radius: 4px;" onerror="this.parentElement.innerHTML=this.parentElement.dataset.fallback">`;
+                    
+                case 'fontawesome':
+                    return `<i class="${this.config.toggleIconValue}" style="font-size: ${size};"></i>`;
+                    
+                case 'custom':
+                    // Allow raw SVG or HTML
+                    return this.config.toggleIconValue;
+                    
+                default:
+                    // Default chat icon SVG
+                    return `<svg viewBox="0 0 24 24" style="width: ${size}; height: ${size}; fill: currentColor;">
+                        <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+                    </svg>`;
+            }
+        }
+
         injectStyles() {
             const style = document.createElement('style');
             style.textContent = CSS_STYLES.replace(/var\(--primary-color\)/g, this.config.primaryColor);
@@ -621,11 +668,14 @@
         }
 
         getWidgetHTML() {
+            const toggleColor = this.config.toggleIconColor || this.config.primaryColor;
+            const fallbackIcon = `<svg viewBox="0 0 24 24" style="width: ${this.config.toggleIconSize}; height: ${this.config.toggleIconSize}; fill: currentColor;"><path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>`;
+            
             return `
-                <button class="simple-chatbot-toggle" style="--primary-color: ${this.config.primaryColor}">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
-                    </svg>
+                <button class="simple-chatbot-toggle" 
+                        style="--primary-color: ${toggleColor}; background: ${toggleColor}; color: white;" 
+                        data-fallback="${fallbackIcon.replace(/"/g, '&quot;')}">
+                    ${this.getToggleIconHTML()}
                     <div class="simple-chatbot-status"></div>
                 </button>
 
@@ -1041,6 +1091,11 @@
             primaryColor: script.getAttribute('data-primary-color') || DEFAULT_CONFIG.primaryColor,
             position: script.getAttribute('data-position') || DEFAULT_CONFIG.position,
             botAvatar: script.getAttribute('data-bot-avatar') || DEFAULT_CONFIG.botAvatar,
+            // Icon customization
+            toggleIcon: script.getAttribute('data-toggle-icon') || DEFAULT_CONFIG.toggleIcon,
+            toggleIconValue: script.getAttribute('data-toggle-icon-value') || DEFAULT_CONFIG.toggleIconValue,
+            toggleIconColor: script.getAttribute('data-toggle-icon-color') || DEFAULT_CONFIG.toggleIconColor,
+            toggleIconSize: script.getAttribute('data-toggle-icon-size') || DEFAULT_CONFIG.toggleIconSize,
             autoOpen: script.getAttribute('data-auto-open') === 'true',
             debugMode: script.getAttribute('data-debug') === 'true'
         };
