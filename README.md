@@ -29,6 +29,11 @@
 
 **That's it!** Replace `YOUR_WEBHOOK_URL_HERE` with your webhook URL and you're done.
 
+> **💡 Cache Issue?** If you're not seeing the latest features (like emoji icons), the CDN might be serving an older cached version. Use one of these alternatives:
+> - Force refresh: `@main` instead of `@latest`
+> - Cache busting: Add `?v=2024` to the URL
+> - Raw GitHub: `https://raw.githubusercontent.com/Stained0bsidian/simple-chatbot/main/simple-chatbot.min.js`
+
 ### Option 2: Interactive Setup Tool
 Use our visual setup tool at [`simple-setup.html`](simple-setup.html) to:
 - Configure your chatbot visually
