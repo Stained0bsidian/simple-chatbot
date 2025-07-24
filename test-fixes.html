@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed Emoji & No Quick Actions Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-info {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="test-info">
+        <h1>🔧 Fixes Applied Test</h1>
+        <p>This page tests both fixes:</p>
+        
+        <h3>✅ Expected Results:</h3>
+        <ul>
+            <li><strong>Toggle button:</strong> 🤖 emoji visible</li>
+            <li><strong>Chat avatar:</strong> 🤖 emoji visible with light background</li>
+            <li><strong>Quick actions:</strong> No predefined buttons at bottom</li>
+        </ul>
+    </div>
+
+    <!-- Test with the updated local script -->
+    <script src="./simple-chatbot.js" 
+            data-webhook-url="https://n8n.bencohen.work/webhook/a6f886cf-d4e3-4c8b-8922-f281da53903e/chat"
+            data-bot-name="Miles"
+            data-welcome-message="Hi, I'm Miles! How can I help you today?"
+            data-primary-color="#111827"
+            data-position="bottom-right"
+            data-auto-open="false"
+            data-toggle-icon="emoji"
+            data-toggle-icon-value="🤖"
+            data-toggle-icon-size="28px"
+            data-debug-mode="true">
+    </script>
+</body>
+</html> 

@@ -519,11 +519,7 @@
             this.messages = [];
             this.isLoading = false;
             this.retryCount = 0;
-            this.quickActions = [
-                'How can you help me?',
-                'Tell me about your services',
-                'Contact information'
-            ];
+            this.quickActions = []; // Removed predefined questions
             
             // Add welcome message
             this.messages.push({
@@ -666,7 +662,7 @@
             
             switch (this.config.toggleIcon) {
                 case 'emoji':
-                    return `<div style="width: ${avatarSize}; height: ${avatarSize}; border-radius: 50%; background: ${bgColor}; display: flex; align-items: center; justify-content: center; font-size: 18px;">${this.config.toggleIconValue || '💬'}</div>`;
+                    return `<div style="width: ${avatarSize}; height: ${avatarSize}; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 18px;">${this.config.toggleIconValue || '💬'}</div>`;
                     
                 case 'image':
                     return `<img src="${this.config.toggleIconValue}" alt="${this.config.botName}" style="width: ${avatarSize}; height: ${avatarSize}; border-radius: 50%; object-fit: cover;" onerror="this.outerHTML=this.parentElement.dataset.fallback">`;
