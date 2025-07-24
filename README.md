@@ -23,7 +23,7 @@
 
 ### Option 1: One-Line Setup (Recommended)
 ```html
-<script src="https://cdn.jsdelivr.net/gh/simple-chatbot/widget@latest/chatbot.min.js" 
+<script src="https://cdn.jsdelivr.net/gh/Stained0bsidian/simple-chatbot@latest/simple-chatbot.min.js" 
         data-webhook-url="YOUR_WEBHOOK_URL_HERE"></script>
 ```
 
@@ -70,7 +70,7 @@ All configuration is done via HTML data attributes:
 
 ### Example with Custom Configuration
 ```html
-<script src="https://cdn.jsdelivr.net/gh/simple-chatbot/widget@latest/chatbot.min.js"
+<script src="https://cdn.jsdelivr.net/gh/Stained0bsidian/simple-chatbot@latest/simple-chatbot.min.js"
         data-webhook-url="https://your-webhook-url.com"
         data-bot-name="Shopping Assistant"
         data-welcome-message="Hi! Need help finding something?"
@@ -180,7 +180,7 @@ import { useEffect } from 'react';
 export default function Layout({ children }) {
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/gh/simple-chatbot/widget@latest/chatbot.min.js';
+    script.src = 'https://cdn.jsdelivr.net/gh/Stained0bsidian/simple-chatbot@latest/simple-chatbot.min.js';
     script.setAttribute('data-webhook-url', process.env.NEXT_PUBLIC_WEBHOOK_URL);
     script.setAttribute('data-bot-name', 'My Assistant');
     document.body.appendChild(script);
@@ -204,7 +204,7 @@ export default function Layout({ children }) {
 export default {
   mounted() {
     const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/gh/simple-chatbot/widget@latest/chatbot.min.js';
+    script.src = 'https://cdn.jsdelivr.net/gh/Stained0bsidian/simple-chatbot@latest/simple-chatbot.min.js';
     script.setAttribute('data-webhook-url', process.env.VUE_APP_WEBHOOK_URL);
     document.body.appendChild(script);
   }
@@ -217,7 +217,7 @@ Add to your theme's `functions.php`:
 ```php
 function add_simple_chatbot() {
     ?>
-    <script src="https://cdn.jsdelivr.net/gh/simple-chatbot/widget@latest/chatbot.min.js"
+    <script src="https://cdn.jsdelivr.net/gh/Stained0bsidian/simple-chatbot@latest/simple-chatbot.min.js"
             data-webhook-url="<?php echo get_option('chatbot_webhook_url'); ?>"
             data-bot-name="<?php echo get_bloginfo('name'); ?> Assistant"></script>
     <?php
@@ -287,7 +287,7 @@ MIT License - feel free to use this in any project, commercial or personal.
 
 ## 🆘 Support
 
-- **Issues**: [GitHub Issues](https://github.com/simple-chatbot/widget/issues)
+- **Issues**: [GitHub Issues](https://github.com/Stained0bsidian/simple-chatbot/issues)
 - **Docs**: Check out our [setup tools](simple-setup.html) and [live demo](demo.html)
 - **Quick Start**: Use our [one-line setup](one-line-setup.html)
 
@@ -297,6 +297,6 @@ MIT License - feel free to use this in any project, commercial or personal.
 
 **Made with ❤️ for developers who value simplicity**
 
-[⭐ Star on GitHub](https://github.com/simple-chatbot/widget) • [🚀 Try Live Demo](demo.html) • [📖 Setup Guide](simple-setup.html)
+[⭐ Star on GitHub](https://github.com/Stained0bsidian/simple-chatbot) • [🚀 Try Live Demo](demo.html) • [📖 Setup Guide](simple-setup.html)
 
 </div>
