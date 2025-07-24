@@ -62,7 +62,7 @@ All configuration is done via HTML data attributes:
 | `data-welcome-message` | "Hi! How can I help you today?" | First message shown |
 | `data-primary-color` | "#3B82F6" | Main color theme |
 | `data-position` | "bottom-right" | Widget position (bottom-right, bottom-left) |
-| `data-bot-avatar` | *default* | Bot avatar image URL (jpg, png, svg, or data URI) |
+| `data-bot-avatar` | *auto-generated* | Custom bot avatar URL (if not set, uses toggle icon for consistency) |
 | **Icon Customization** | | |
 | `data-toggle-icon` | "default" | Icon type: "default", "emoji", "image", "fontawesome", "custom" |
 | `data-toggle-icon-value` | "" | Icon value (emoji, URL, FA class, or SVG) |
@@ -86,9 +86,17 @@ All configuration is done via HTML data attributes:
         data-auto-open="true"></script>
 ```
 
+## 🎨 Unified Icon System
+
+**NEW:** The bot avatar automatically matches your toggle icon for perfect visual consistency! When you customize the toggle icon, the bot's avatar in chat messages will use the same design, creating a cohesive experience.
+
+- **Default behavior**: Bot avatar mirrors the toggle button icon
+- **Custom override**: Set `data-bot-avatar` to use a different image for the bot
+- **Consistent colors**: Toggle icon color applies to both button and avatar backgrounds
+
 ## 🎨 Icon Customization Examples
 
-### 1. Emoji Toggle Icon
+### 1. Emoji Toggle Icon (🤖 appears in both toggle button and chat avatar)
 ```html
 <script src="https://cdn.jsdelivr.net/gh/Stained0bsidian/simple-chatbot@latest/simple-chatbot.min.js"
         data-webhook-url="YOUR_WEBHOOK_URL"
@@ -97,7 +105,7 @@ All configuration is done via HTML data attributes:
         data-toggle-icon-size="28px"></script>
 ```
 
-### 2. Custom Image Toggle Icon
+### 2. Custom Image Toggle Icon (same image used for toggle and avatar)
 ```html
 <script src="https://cdn.jsdelivr.net/gh/Stained0bsidian/simple-chatbot@latest/simple-chatbot.min.js"
         data-webhook-url="YOUR_WEBHOOK_URL"
@@ -123,13 +131,16 @@ All configuration is done via HTML data attributes:
         data-toggle-icon-value='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="white"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="2"/></svg>'></script>
 ```
 
-### 5. Custom Bot Avatar
+### 5. Override: Custom Bot Avatar (different from toggle icon)
 ```html
 <script src="https://cdn.jsdelivr.net/gh/Stained0bsidian/simple-chatbot@latest/simple-chatbot.min.js"
         data-webhook-url="YOUR_WEBHOOK_URL"
+        data-toggle-icon="emoji"
+        data-toggle-icon-value="💬"
         data-bot-avatar="https://your-site.com/bot-avatar.jpg"
         data-bot-name="Alex Assistant"></script>
 ```
+*Toggle shows 💬 emoji, but chat messages show the custom avatar image*
 
 ---
 

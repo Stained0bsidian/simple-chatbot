@@ -19,7 +19,7 @@
         welcomeMessage: 'Hi! How can I help you today?',
         primaryColor: '#3B82F6',
         position: 'bottom-right',
-        botAvatar: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiMzQjgyRjYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0yMSAxNVY5QzIxIDcuMzQzMTUgMTkuNjU2OSA2IDE4IDZIMTJWNEMxMiAyLjg5NTQzIDExLjEwNDYgMiAxMCAySDhDNi44OTU0MyAyIDYgMi44OTU0MyA2IDRWNkg0QzIuMzQzMTUgNiAxIDcuMzQzMTUgMSA5VjE1QzEgMTYuNjU2OSAyLjM0MzE1IDE4IDQgMThINlYyMEM2IDIxLjEwNDYgNi44OTU0MyAyMiA4IDIySDE2QzE3LjEwNDYgMjIgMTggMjEuMTA0NiAxOCAyMFYxOEgyMUMyMS42NTY5IDE4IDIyIDE3LjY1NjkgMjIgMTdWMTVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+',
+        botAvatar: null,  // Will auto-generate based on toggle icon for consistency
         // Icon customization options
         toggleIcon: 'default',        // 'default', 'emoji', 'image', 'fontawesome', or 'custom'
         toggleIconValue: '',          // The actual icon value (emoji, image URL, FA class, or SVG)
@@ -293,12 +293,21 @@
             align-self: flex-end;
         }
         
-        .simple-chatbot-message-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
+                 .simple-chatbot-message-avatar {
+             width: 32px;
+             height: 32px;
+             flex-shrink: 0;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+         }
+         
+         .simple-chatbot-message-avatar img {
+             width: 32px;
+             height: 32px;
+             border-radius: 50%;
+             object-fit: cover;
+         }
         
         .simple-chatbot-message-content {
             max-width: 80%;
@@ -644,6 +653,40 @@
             }
         }
 
+        // Generate bot avatar that matches the toggle icon for consistency
+        getBotAvatarHTML() {
+            // If custom bot avatar is set, use it
+            if (this.config.botAvatar) {
+                return `<img src="${this.config.botAvatar}" alt="${this.config.botName}" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;" onerror="this.outerHTML=this.parentElement.dataset.fallback">`;
+            }
+            
+            // Otherwise, create avatar based on toggle icon configuration
+            const avatarSize = '32px';
+            const bgColor = this.config.toggleIconColor || this.config.primaryColor;
+            
+            switch (this.config.toggleIcon) {
+                case 'emoji':
+                    return `<div style="width: ${avatarSize}; height: ${avatarSize}; border-radius: 50%; background: ${bgColor}; display: flex; align-items: center; justify-content: center; font-size: 18px;">${this.config.toggleIconValue || '💬'}</div>`;
+                    
+                case 'image':
+                    return `<img src="${this.config.toggleIconValue}" alt="${this.config.botName}" style="width: ${avatarSize}; height: ${avatarSize}; border-radius: 50%; object-fit: cover;" onerror="this.outerHTML=this.parentElement.dataset.fallback">`;
+                    
+                case 'fontawesome':
+                    return `<div style="width: ${avatarSize}; height: ${avatarSize}; border-radius: 50%; background: ${bgColor}; display: flex; align-items: center; justify-content: center; color: white;"><i class="${this.config.toggleIconValue}" style="font-size: 16px;"></i></div>`;
+                    
+                case 'custom':
+                    return `<div style="width: ${avatarSize}; height: ${avatarSize}; border-radius: 50%; background: ${bgColor}; display: flex; align-items: center; justify-content: center; color: white;">${this.config.toggleIconValue}</div>`;
+                    
+                default:
+                    // Default chat icon in a circular avatar
+                    return `<div style="width: ${avatarSize}; height: ${avatarSize}; border-radius: 50%; background: ${bgColor}; display: flex; align-items: center; justify-content: center; color: white;">
+                        <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: currentColor;">
+                            <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+                        </svg>
+                    </div>`;
+            }
+        }
+
         injectStyles() {
             const style = document.createElement('style');
             style.textContent = CSS_STYLES.replace(/var\(--primary-color\)/g, this.config.primaryColor);
@@ -680,11 +723,11 @@
                 </button>
 
                 <div class="simple-chatbot-window" style="--primary-color: ${this.config.primaryColor}">
-                    <div class="simple-chatbot-header">
-                        <div class="simple-chatbot-bot-info">
-                            <div class="simple-chatbot-avatar">
-                                <img src="${this.config.botAvatar}" alt="${this.config.botName}" onerror="this.style.display='none'">
-                            </div>
+                                         <div class="simple-chatbot-header">
+                         <div class="simple-chatbot-bot-info">
+                             <div class="simple-chatbot-avatar" data-fallback='<div style="width: 32px; height: 32px; border-radius: 50%; background: ${this.config.primaryColor}; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px;">?</div>'>
+                                 ${this.getBotAvatarHTML()}
+                             </div>
                             <div class="simple-chatbot-details">
                                 <h3>${this.config.botName}</h3>
                                 <p>Online</p>
@@ -968,32 +1011,32 @@
             this.messagesContainer.innerHTML = messagesHTML + typingHTML;
         }
 
-        getMessageHTML(message) {
-            const className = message.isUser ? 'user' : (message.isError ? 'error' : 'bot');
-            const avatar = message.isUser ? '' : `<img src="${this.config.botAvatar}" alt="${this.config.botName}" class="simple-chatbot-message-avatar">`;
-            
-            let actionButtons = '';
-            if (message.isError && message.actionText && !message.isRetrying) {
-                actionButtons = `
-                    <div class="simple-chatbot-error-actions">
-                        <button class="simple-chatbot-error-btn" onclick="this.closest('.simple-chatbot').chatBot.handleErrorAction('${message.errorType}')">
-                            ${message.actionText}
-                        </button>
-                    </div>
-                `;
-            }
-            
-            return `
-                <div class="simple-chatbot-message ${className}">
-                    ${avatar}
-                    <div class="simple-chatbot-message-content">
-                        <div class="simple-chatbot-message-bubble">${message.text}</div>
-                        ${actionButtons}
-                        <div class="simple-chatbot-message-time">${this.formatTime(message.timestamp)}</div>
-                    </div>
-                </div>
-            `;
-        }
+                 getMessageHTML(message) {
+             const className = message.isUser ? 'user' : (message.isError ? 'error' : 'bot');
+             const avatar = message.isUser ? '' : `<div class="simple-chatbot-message-avatar">${this.getBotAvatarHTML()}</div>`;
+             
+             let actionButtons = '';
+             if (message.isError && message.actionText && !message.isRetrying) {
+                 actionButtons = `
+                     <div class="simple-chatbot-error-actions">
+                         <button class="simple-chatbot-error-btn" onclick="this.closest('.simple-chatbot').chatBot.handleErrorAction('${message.errorType}')">
+                             ${message.actionText}
+                         </button>
+                     </div>
+                 `;
+             }
+             
+             return `
+                 <div class="simple-chatbot-message ${className}">
+                     ${avatar}
+                     <div class="simple-chatbot-message-content">
+                         <div class="simple-chatbot-message-bubble">${message.text}</div>
+                         ${actionButtons}
+                         <div class="simple-chatbot-message-time">${this.formatTime(message.timestamp)}</div>
+                     </div>
+                 </div>
+             `;
+         }
 
         handleErrorAction(errorType) {
             switch (errorType) {
@@ -1012,23 +1055,23 @@
             }
         }
 
-        getTypingHTML() {
-            return `
-                <div class="simple-chatbot-message bot">
-                    <img src="${this.config.botAvatar}" alt="${this.config.botName}" class="simple-chatbot-message-avatar">
-                    <div class="simple-chatbot-message-content">
-                        <div class="simple-chatbot-typing">
-                            <div class="simple-chatbot-typing-dots">
-                                <div class="simple-chatbot-typing-dot"></div>
-                                <div class="simple-chatbot-typing-dot"></div>
-                                <div class="simple-chatbot-typing-dot"></div>
-                            </div>
-                            <span>${this.config.botName} is typing...</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
+                 getTypingHTML() {
+             return `
+                 <div class="simple-chatbot-message bot">
+                     <div class="simple-chatbot-message-avatar">${this.getBotAvatarHTML()}</div>
+                     <div class="simple-chatbot-message-content">
+                         <div class="simple-chatbot-typing">
+                             <div class="simple-chatbot-typing-dots">
+                                 <div class="simple-chatbot-typing-dot"></div>
+                                 <div class="simple-chatbot-typing-dot"></div>
+                                 <div class="simple-chatbot-typing-dot"></div>
+                             </div>
+                             <span>${this.config.botName} is typing...</span>
+                         </div>
+                     </div>
+                 </div>
+             `;
+         }
 
         setLoading(loading) {
             this.isLoading = loading;
